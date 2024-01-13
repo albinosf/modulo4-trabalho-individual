@@ -1,0 +1,56 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Criação do DataFrame
+data = {
+    'Dia': ['segunda', 'terça', 'quarta', 'quinta', 'sexta', 'sabado', 'domingo'],
+    'Horas Trabalhadas': [6, 7, 8, 6, 7, 5, 4],
+    'Bugs Corrigidos': [3, 2, 1, 4, 3, 2, 1],
+    'Tarefas Concluidas': [5, 4, 6, 4, 5, 3, 2]
+}
+
+df = pd.DataFrame(data)
+
+# Cálculo das estatísticas
+total_horas = round(df['Horas Trabalhadas'].sum(), 2)
+media_horas = round(df['Horas Trabalhadas'].mean(), 2)
+
+total_bugs = round(df['Bugs Corrigidos'].sum(), 2)
+media_bugs = round(df['Bugs Corrigidos'].mean(), 2)
+
+total_tarefas = round(df['Tarefas Concluidas'].sum(), 2)
+media_tarefas = round(df['Tarefas Concluidas'].mean(), 2)
+
+# Exibição das estatísticas
+print(f'Total de Horas Trabalhadas: {total_horas}')
+print(f'Média Diária de Horas Trabalhadas: {media_horas}')
+print(f'Total de Bugs Corrigidos: {total_bugs}')
+print(f'Média Diária de Bugs Corrigidos: {media_bugs}')
+print(f'Total de Tarefas Concluídas: {total_tarefas}')
+print(f'Média Diária de Tarefas Concluídas: {media_tarefas}')
+
+# Criação dos gráficos
+fig, axs = plt.subplots(4, 1, figsize=(10, 20))
+
+axs[0].bar(df['Dia'], df['Horas Trabalhadas'])
+axs[0].set_title('Horas Trabalhadas')
+axs[0].set_xlabel('Dia')
+axs[0].set_ylabel('Horas')
+
+axs[1].bar(df['Dia'], df['Bugs Corrigidos'])
+axs[1].set_title('Bugs Corrigidos')
+axs[1].set_xlabel('Dia')
+axs[1].set_ylabel('Bugs')
+
+axs[2].bar(df['Dia'], df['Tarefas Concluidas'])
+axs[2].set_title('Tarefas Concluídas')
+axs[2].set_xlabel('Dia')
+axs[2].set_ylabel('Tarefas')
+
+axs[3].bar(df['Dia'], df['Tarefas Concluidas'] / df['Horas Trabalhadas'])
+axs[3].set_title('Produtividade (Tarefas Concluídas por Hora)')
+axs[3].set_xlabel('Dia')
+axs[3].set_ylabel('Produtividade')
+
+plt.tight_layout()
+plt.show()
